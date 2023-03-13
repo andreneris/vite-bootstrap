@@ -85,6 +85,7 @@ export const schema: RJSFSchema = {
       type:'object',
       properties:{
         shortDescription: {
+          title: 'Descrição',
           type: 'string',
         },
         description: {
@@ -100,11 +101,14 @@ export const schema: RJSFSchema = {
 };
 
 export const uischema = {
+
   number: {
-    'ui:options': { 'readonly': true,xs:6 }
+    'ui:options': { 'readonly': true,xs:6 },
+    
   },
   state: {
     'ui:xs':6,
+    'ui:placeholder': 'Choose an option',
   },
   opened_by: {
     'ui:xs': '6',
@@ -123,6 +127,7 @@ export const uischema = {
   //  xs: '12',
     impact: {
       'ui:xs': '4',
+      'ui:class':'col-6'
     },
     urgency: {
       'ui:xs': '4',
@@ -134,6 +139,8 @@ export const uischema = {
 
   details:{
     description: {
+      "ui:help": "Hint: Make it strong!",
+      
       'ui:widget': 'textarea',
       'ui:options': { color: 'red', rows: 8 },
     },
