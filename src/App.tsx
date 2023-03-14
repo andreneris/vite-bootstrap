@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import validator, {schema, uiSchema } from './schemas/Task';
+import Form from '@rjsf/bootstrap-4';
 
-import validator, { schema, uischema } from './schemas/Form1';
-import Form, { Templates } from '@rjsf/bootstrap-4';
 
 import {
   ObjectFieldTemplateProps,
@@ -13,32 +12,6 @@ import './App.css';
 
 import { Card } from 'react-bootstrap';
 
-function CustomFieldTemplate(props: FieldTemplateProps) {
-  const {
-    id,
-    classNames,
-    style,
-    label,
-    help,
-    required,
-    description,
-    errors,
-    children,
-  } = props;
-  console.log(classNames);
-  return (
-    <div className="form-group field fieldstring col-md-12" style={style}>
-      <label htmlFor={id}>
-        {label}
-        {required ? '*' : null}
-      </label>
-      {description}
-      {children}
-      {errors}
-      {help}
-    </div>
-  );
-}
 
 export function FluidFormLayout(props: ObjectFieldTemplateProps): JSX.Element {
   const { properties, description, title, uiSchema } = props;
@@ -63,35 +36,23 @@ export function FluidFormLayout(props: ObjectFieldTemplateProps): JSX.Element {
     </fieldset>
   );
 }
-/*
-const MyBaseInputTemplate = (props: BaseInputTemplateProps) => {
-  const { registry, uiOptions } = props;
-  const { BaseInputTemplate } = Templates;
-  //const { templates: { BaseInputTemplate } } = getDefaultTemplates();
-  /*const BaseInputTemplate = getTemplate(
-    'BaseInputTemplate',
-    registry,
-    uiOptions
-  );* /
-  return <BaseInputTemplate {...props} size="small" />;
-};
 
 
-*/
+
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <div className="App">
+
       <Form
         schema={schema}
-        uiSchema={uischema}
+        uiSchema={uiSchema}
         validator={validator}
         liveValidate
         templates={{
           ObjectFieldTemplate: FluidFormLayout,
-          //FieldTemplate: CustomFieldTemplate
         }}
+
       />
     </div>
   );
