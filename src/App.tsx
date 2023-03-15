@@ -1,6 +1,7 @@
-import validator, {schema, uiSchema } from './schemas/Task';
+import validator, { schema, uiSchema } from './schemas/Task';
+import { widget, LookupWidget } from './widgets/LookupWidget';
+import {LookupSelectFieldConfig} from './widgets/LookupSelectFieldConfig';
 import Form from '@rjsf/bootstrap-4';
-
 
 import {
   ObjectFieldTemplateProps,
@@ -10,18 +11,13 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import { Card } from 'react-bootstrap';
-
-
 export function FluidFormLayout(props: ObjectFieldTemplateProps): JSX.Element {
   const { properties, description, title, uiSchema } = props;
 
   return (
     <fieldset className="form-row">
-     
       <legend>{title}</legend>
-     
-      
+
       {properties.map((prop) => {
         const fieldName = prop.name;
         if (uiSchema && fieldName && fieldName in uiSchema) {
@@ -31,28 +27,26 @@ export function FluidFormLayout(props: ObjectFieldTemplateProps): JSX.Element {
         }
         return <div className={`col-12`}>{prop.content}</div>;
       })}
-      
+
       {description}
     </fieldset>
   );
 }
 
-
-
 function App() {
-
   return (
     <div className="App">
-
       <Form
         schema={schema}
         uiSchema={uiSchema}
         validator={validator}
-        liveValidate
+        //liveValidate
         templates={{
           ObjectFieldTemplate: FluidFormLayout,
         }}
-
+        //widgets={widget}
+        //fields = {LookupSelectFieldConfig.fields}
+        //{...LookupSelectFieldConfig}
       />
     </div>
   );
