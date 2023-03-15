@@ -23,7 +23,7 @@ export function FluidFormLayout(props: ObjectFieldTemplateProps): JSX.Element {
         if (uiSchema && fieldName && fieldName in uiSchema) {
           var uiOptions = getUiOptions(uiSchema[fieldName]);
           const { xs = 12, md = 12, lg = 12 } = uiOptions;
-          return <div className={`col-${xs}`}>{prop.content}</div>;
+          return <div key={`divid-${prop.name}`} className={`col-${xs}`}>{prop.content}</div>;
         }
         return <div className={`col-12`}>{prop.content}</div>;
       })}
