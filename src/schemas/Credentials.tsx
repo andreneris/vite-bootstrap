@@ -7,6 +7,7 @@ export const schema: RJSFSchema = {
   title: 'API Credentials',
   type: 'object',
   properties: {
+    id: { type: 'integer',title:'#' },
     alias:{
       type:'string'
     },

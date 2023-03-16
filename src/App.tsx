@@ -1,8 +1,8 @@
 import validator, { schema, uiSchema } from './schemas/Credentials';
-import { widget, LookupWidget } from './widgets/LookupWidget';
-import { LookupSelectFieldConfig } from './widgets/LookupSelectFieldConfig';
+import {JTable} from './table/JsonSchemaTable';
 import {ExampleTable} from './table/ExampleTable';
 import Form from '@rjsf/bootstrap-4';
+import {useState} from 'react';
 
 import {
   ObjectFieldTemplateProps,
@@ -39,15 +39,23 @@ export function FluidFormLayout(props: ObjectFieldTemplateProps): JSX.Element {
 }
 
 function App() {
+  const [data, setData] = useState([{}]);
+  
+  const onSubmit = ({ formData }) => {
+    setData([...data, formData ]);
+   // console.log('Data submitted: ', formData)
+  // console.log(data)
+  };
   return (
     <div className="App">
       <ExampleTable/>
-      {/*}
       
+
       <Form
         schema={schema}
         uiSchema={uiSchema}
         validator={validator}
+        onSubmit={onSubmit}
         //liveValidate
         templates={{
           ObjectFieldTemplate: FluidFormLayout,
@@ -55,7 +63,8 @@ function App() {
         //widgets={widget}
         //fields = {LookupSelectFieldConfig.fields}
         //{...LookupSelectFieldConfig}
-      />*/}
+      />
+      <JTable defaultData={data} schema={schema}/>
     </div>
   );
 }
