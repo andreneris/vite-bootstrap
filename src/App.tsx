@@ -1,6 +1,7 @@
-import validator, { schema, uiSchema } from './schemas/Rest';
+import validator, { schema, uiSchema } from './schemas/Credentials';
 import { widget, LookupWidget } from './widgets/LookupWidget';
 import { LookupSelectFieldConfig } from './widgets/LookupSelectFieldConfig';
+import {ExampleTable} from './table/ExampleTable';
 import Form from '@rjsf/bootstrap-4';
 
 import {
@@ -40,6 +41,9 @@ export function FluidFormLayout(props: ObjectFieldTemplateProps): JSX.Element {
 function App() {
   return (
     <div className="App">
+      <ExampleTable/>
+      {/*}
+      
       <Form
         schema={schema}
         uiSchema={uiSchema}
@@ -51,7 +55,7 @@ function App() {
         //widgets={widget}
         //fields = {LookupSelectFieldConfig.fields}
         //{...LookupSelectFieldConfig}
-      />
+      />*/}
     </div>
   );
 }
