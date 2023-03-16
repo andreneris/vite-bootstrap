@@ -1,4 +1,4 @@
-import validator, { schema, uiSchema } from './schemas/Credentials';
+import validator, { schema, uiSchema } from './schemas/Rest';
 import { widget, LookupWidget } from './widgets/LookupWidget';
 import { LookupSelectFieldConfig } from './widgets/LookupSelectFieldConfig';
 import Form from '@rjsf/bootstrap-4';
