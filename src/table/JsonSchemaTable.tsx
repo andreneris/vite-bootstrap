@@ -10,6 +10,8 @@ import {
 import { Table as BTable } from 'react-bootstrap';
 import { convertJSONSchemaToColumns } from '../utils/JsonSchemaToColumns';
 
+
+
 /*
 
 export function JsonSchemaTable() {
@@ -25,11 +27,13 @@ export function JsonSchemaTable() {
 export function JTable({
   defaultData,
   schema,
+  onActionClick,
 }: {
-  defaultData: any[];
-  schema: RJSFSchema;
+  defaultData: any[],
+  schema: RJSFSchema,
+  onActionClick: any
 }) {
-  const columns = convertJSONSchemaToColumns(schema);
+  const columns = convertJSONSchemaToColumns(schema,onActionClick);
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   //const [data, setData] = React.useState(() => [...defaultData]);

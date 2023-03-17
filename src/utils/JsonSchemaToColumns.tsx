@@ -1,5 +1,5 @@
 import { createColumnHelper } from '@tanstack/react-table';
-
+import Button from 'react-bootstrap/Button';
 type JSONSchema = {
   title: string;
   type: string;
@@ -8,12 +8,24 @@ type JSONSchema = {
 
 const columnHelper = createColumnHelper<any>();
 
-export function convertJSONSchemaToColumns(jsonSchema: JSONSchema):any[]{
-  const columns = [];
+export function convertJSONSchemaToColumns(
+  jsonSchema: JSONSchema,
+  onActionClick
+): any[] {
+  const acction = columnHelper.display({
+    id: 'actions',
+    cell: (props) => (
+      <Button onClick={() => onActionClick(props.row.original)} />
+    ),
+  });
+
+  const columns = [acction];
 
   // Loop through each property in the JSON schema and create a column for it
   for (const propertyName in jsonSchema.properties) {
-    if (Object.prototype.hasOwnProperty.call(jsonSchema.properties, propertyName)) {
+    if (
+      Object.prototype.hasOwnProperty.call(jsonSchema.properties, propertyName)
+    ) {
       const property = jsonSchema.properties[propertyName];
 
       // Extract relevant schema properties
@@ -27,16 +39,14 @@ export function convertJSONSchemaToColumns(jsonSchema: JSONSchema):any[]{
         return cell.getValue();
       };
 
-
       const column = columnHelper.accessor(propertyName, {
-        cell: Cell,//info => info.getValue(),
+        cell: Cell, //info => info.getValue(),
         header: () => <span>{Header}</span>,
         //footer: info => info.column.id,
       });
 
       columns.push(column);
     }
-
   }
   return columns;
 }

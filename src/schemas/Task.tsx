@@ -70,8 +70,7 @@ export const schema: RJSFSchema = {
       "title": "Category",
       description:
         'A classification that helps to group related tasks together.',
-        enum:[]
-      //enum: ['Hardware', 'Software', 'Facilities'],
+      enum: ['Hardware', 'Software', 'Facilities'],
     },
     subcategory: {
       type: 'string',

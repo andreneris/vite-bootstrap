@@ -1,8 +1,8 @@
-import validator, { schema, uiSchema } from './schemas/Credentials';
-import {JTable} from './table/JsonSchemaTable';
-import {ExampleTable} from './table/ExampleTable';
+import validator, { schema, uiSchema } from './schemas/Task';
+import { JTable } from './table/JsonSchemaTable';
+
 import Form from '@rjsf/bootstrap-4';
-import {useState} from 'react';
+import { useState } from 'react';
 
 import {
   ObjectFieldTemplateProps,
@@ -39,18 +39,19 @@ export function FluidFormLayout(props: ObjectFieldTemplateProps): JSX.Element {
 }
 
 function App() {
-  const [data, setData] = useState([{}]);
-  
+  const [data, setData] = useState([]);
+  const [formData, setFormData] = useState({});
   const onSubmit = ({ formData }) => {
-    setData([...data, formData ]);
-   // console.log('Data submitted: ', formData)
-  // console.log(data)
+    setData([...data, formData]);
+    setFormData({});
   };
+
+  const handleFormData = (data) => {
+    setFormData(data);
+  };
+
   return (
     <div className="App">
-      <ExampleTable/>
-      
-
       <Form
         schema={schema}
         uiSchema={uiSchema}
@@ -60,11 +61,16 @@ function App() {
         templates={{
           ObjectFieldTemplate: FluidFormLayout,
         }}
+        formData={formData}
         //widgets={widget}
         //fields = {LookupSelectFieldConfig.fields}
         //{...LookupSelectFieldConfig}
       />
-      <JTable defaultData={data} schema={schema}/>
+      <JTable
+        defaultData={data}
+        schema={schema}
+        onActionClick={handleFormData}
+      />
     </div>
   );
 }
